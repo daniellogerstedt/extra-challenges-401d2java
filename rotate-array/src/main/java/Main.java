@@ -14,15 +14,20 @@ public class Main {
      */
 
     public static int[] rotateArray (int[] arr, int num) {
-        while (num > arr.length) num = num - arr.length;
         if (arr.length == 0 || num == 0) {
-            return arr;
-        } else if (num > 0) return rotateArrayRight(arr, num);
-        else return rotateArrayLeft(arr, num);
+            return arr; /* returns arr if empty or no rotation */
+        } else if (num > 0) {
+            while (num > arr.length) num = num - arr.length; /* removes full rotation */
+            return rotateArrayRight(arr, num); /* invocation of right rotation helper function */
+        } else {
+            num = num * (-1); /* makes num positive if negative after direction is determined */
+            while (num > arr.length) num = num - arr.length; /* removes full rotation */
+            return rotateArrayLeft(arr, num); /* invocation of left rotation helper function */
+        }
     }
 
     /*
-     * Method for rotating the array for positive numbers (to the right).
+     * Helper function for rotating the array for positive numbers (to the right).
      */
 
     public static int[] rotateArrayRight(int[] arr, int num) {
@@ -39,7 +44,7 @@ public class Main {
     }
 
     /*
-     * Method for rotating the array for negative numbers (to the left).
+     * Helper function for rotating the array for negative numbers (to the left).
      */
 
     public static int[] rotateArrayLeft(int[] arr, int num) {
